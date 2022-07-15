@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/hello")
-public class TestServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/random")
+public class RandomServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("서비스 메소드 호출됨 ...!");
 		
-	
-	}//class
+		int random = (int) (Math.random()* 6 + 1);
+		System.out.println(random);
+		
+	}
 }
