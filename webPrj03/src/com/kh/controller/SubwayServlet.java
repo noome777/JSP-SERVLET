@@ -34,13 +34,14 @@ public class SubwayServlet extends HttpServlet {
 		} else if(age >=14 && age < 20) {
 			System.out.println("720원");
 		} else if(age >= 8 && age < 14) {
-			System.out.println("360원");
+			System.out.println("450원");
 		} else {
 			System.out.println("무료");
 		}
 			
 		//출력
-		resp.setContentType("text/plain; charset-UTF-8");
+		resp.setContentType("text/plain; charset=UTF-8");
+//		resp.setCharacterEncoding("charset=UTF-8");
 		PrintWriter pw = resp.getWriter();
 		
 		pw.println();
