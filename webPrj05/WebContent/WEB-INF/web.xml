@@ -9,4 +9,16 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+  <!-- 
+	<servlet>
+		<servlet-name>abc</servlet-name>
+		<servlet-class>com.kh.controller.MyServlet</servlet-class>
+	</servlet>
+  
+  	<servlet-mapping>
+  		<servlet-name>abc</servlet-name>
+  		<url-pattern>/my123</url-pattern>
+  	</servlet-mapping> -->
+  
 </web-app>
