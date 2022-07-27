@@ -9,8 +9,8 @@
 <body>
 	<h1>JSP 연습</h1>
 		
-	<form action="/webPrj12/lotto.jsp" method="get" name="game">
-		몇 게임 할 건지?  <input type="text"> 
+	<form action="/webPrj12/lotto.jsp" method="get">
+		몇 게임 할 건지?  <input type="text"  name="game"> 
 		<input type="submit">
 	</form>
 </body>

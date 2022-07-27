@@ -24,8 +24,8 @@ public class LottoController extends HttpServlet {
 		for(int i = 0; i < game; ++i){
 			ArrayList<Integer> result = lc.getLotto();
 			
-			//화면 만들기
-			resp.getWriter().println(result);
+		//화면 만들기
+		resp.getWriter().println(result);
 			
 			
 		}

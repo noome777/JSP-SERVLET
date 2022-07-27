@@ -9,8 +9,8 @@
 <body>
 	<h1>포워딩(서블릿 -> jsp) 연습</h1>
 		
-	<form action="/webPrj12/sj" method="get" name="game">
-		몇 게임 할 건지?  <input type="text"> 
+	<form action="/webPrj12/sj" method="get" >
+		몇 게임 할 건지?  <input type="text" name="game"> 
 		<input type="submit">
 	</form>
 </body>
