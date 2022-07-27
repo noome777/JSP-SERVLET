@@ -7,12 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>인덱스 페이지</h1>
-	
-	<a href="/webPrj12/views/test01.jsp">서블릿 연습</a>
-	<br>
-	<a href="views/test02.jsp">JSP 연습</a>
-	<br>
-	<a href="/webPrj12/views/test03.jsp">포워딩 연습</a>
+	<h1>로그인 실패</h1>
 </body>
 </html>

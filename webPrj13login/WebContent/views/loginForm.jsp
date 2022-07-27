@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>JSP 연습</h1>
-		
-	<form action="/webPrj12/lotto.jsp" method="get">
-		몇 게임 할 건지?  <input type="text"> 
-		<input type="submit">
-	</form>
+
+<h1>로그인</h1>
+
+<form action="/loginPrj/login" method="post">
+	id : <input type="text" name="userId"> <br>
+	pwd : <input type="text" name="userPwd"> <br>
+	<input type="submit">
+</form>
 </body>
 </html>

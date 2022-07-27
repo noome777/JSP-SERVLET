@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>서블릿 연습</h1>
-	
-	<form action="/webPrj12/lotto" method="get">
-		몇 게임 할 건지?  <input type="text"> 
-		<input type="submit">
-	</form>
+	<h1>로그인 성공</h1>
 </body>
 </html>

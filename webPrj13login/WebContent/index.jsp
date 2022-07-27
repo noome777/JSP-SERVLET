@@ -7,11 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>포워딩(서블릿 -> jsp) 연습</h1>
-		
-	<form action="/webPrj12/sj" method="get">
-		몇 게임 할 건지?  <input type="text"> 
-		<input type="submit">
-	</form>
+	<a href="views/loginForm.jsp">로그인</a>
+	<a href="views/joinForm.jsp">회원가입</a>
 </body>
 </html>
