@@ -22,12 +22,13 @@
 </head>
 <body>
 
+	<%@ include file="/views/common/header.jsp" %>
 
 	<h1>div 색 변경 (사용자가 고른 색)</h1>
 	
 	<div></div>
 	
 	
-	
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
