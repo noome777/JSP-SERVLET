@@ -21,7 +21,7 @@ public class LottoController extends HttpServlet {
 		//로또 번호 사용자가 원하는 만큼 생성해주기
 		LottoConstructor lc = new LottoConstructor();
 		
-		for(int i = 0; i < game; ++i) {
+		for(int i = 0; i < game; ++i){
 			ArrayList<Integer> result = lc.getLotto();
 			
 			//화면 만들기
