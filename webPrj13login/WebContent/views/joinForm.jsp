@@ -9,7 +9,7 @@
 <body>
 		<h1>회원가입</h1>
 		
-		<form action="/loginPrj/join" method="post">  
+	<form action="/loginPrj/join" method="post">  
 		<br>
 		아이디 : <input type="text" name="userId">
 		<br>
