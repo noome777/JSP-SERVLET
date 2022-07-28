@@ -28,6 +28,7 @@ public class JDBCTemplate {
 		//String url ="jdbc:oracle:thin:@localhost:1521:xe";
 		//String dbId = "C##KH";
 		//String dbPwd = "KH";
+		
 		Class.forName(driver);
 		
 		Connection conn = DriverManager.getConnection(url, dbId, dbPwd);
