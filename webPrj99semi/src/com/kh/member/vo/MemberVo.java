@@ -11,6 +11,7 @@ import java.security.Timestamp;
 	   private int no;           
        private String id;           
        private String pwd;          
+       private String pwd2;          
        private String name;         
        private String phone;        
        private String email;        
@@ -35,6 +36,30 @@ import java.security.Timestamp;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
+	}
+
+
+	//회원가입시 사용하는 생성자
+	public MemberVo(String memberId, String memberPwd, String memberPwd2,  String memberName, String memberPhone, String memberEmail,
+			String memberAddr, String memberInterest) {
+		this.id = memberId;
+		this.pwd = memberPwd;
+		this.pwd2 = memberPwd2;
+		this.name = memberName;
+		this.phone = memberPhone;
+		this.email = memberEmail;
+		this.addr = memberAddr;
+		this.interest = memberInterest;
+	}
+
+
+	public String getPwd2() {
+		return pwd2;
+	}
+
+
+	public void setPwd2(String pwd2) {
+		this.pwd2 = pwd2;
 	}
 
 

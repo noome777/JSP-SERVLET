@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.servicce.MemberService;
+import com.kh.member.vo.MemberVo;
+
 @WebServlet(urlPatterns = "/member/join")
 public class memberJoinController extends HttpServlet {
 	
@@ -19,7 +22,7 @@ public class memberJoinController extends HttpServlet {
 	/*
 	 * 회원가입 화면 보여주기
 	 * 회원가입 버튼을 누르면 http://127.0.0.1:8888/semi/member/join 로 요청을 보내지만 실제로는 서블릿이 jsp에 보낸 요청을 가지고 /views/member/joinForm.jsp 여기에 데이터 넘겨줌
-	//버튼태그 눌렀을 때 location.href로 url자체를 바꿔서 요청 보내는 거라서 doGet으로 해야된다.
+	//버튼태그 눌렀을 때 location.href로 location을 바꾸는 것으로, url자체를 바꿔서 요청 보내는 거라서 doGet으로 해야된다.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,19 +45,54 @@ public class memberJoinController extends HttpServlet {
 		
 		String memberId = req.getParameter("memberId");
 		String memberPwd = req.getParameter("memberPwd");
+		String memberPwd2 = req.getParameter("memberPwd2");
 		String memberName = req.getParameter("memberName");
 		String memberPhone = req.getParameter("memberPhone");
 		String memberEmail = req.getParameter("memberEmail");
 		String memberAddr = req.getParameter("memberAddr");
 		String [] interest = req.getParameterValues("interest");
 		
-		System.out.println(memberId);
-		System.out.println(memberPwd);
-		System.out.println(memberName);
-		System.out.println(memberPhone);
-		System.out.println(memberEmail);
-		System.out.println(memberAddr);
-		System.out.println(String.join("/", interest));
+		
+		//1. setter를 이용 -> 사람입장에서 편리
+//		MemberVo vo = new MemberVo();		
+//		vo.setId(memberId);
+//		vo.setPwd(memberPwd);
+//		vo.setName(memberName);
+//		vo.setPhone(memberPhone);
+//		vo.setEmail(memberEmail);
+//		vo.setAddr(memberAddr);
+//		vo.setInterest(String.join(",", interest));
+//		System.out.println(vo);
+		
+		//2. 생성자를 이용 (객체가 태어날 때부터 데이터를 들고 객체를 만들면서 태어나니까 무결성, 안전성으로 인해 좋은 것임)-> 컴퓨터 입장에서 좋음
+		
+		//취미 선택 없을 경우 방어코드 ->null일 경우 string.join 해주면 안 되니까
+		String hobbys = "";
+		if(interest != null) {
+			hobbys = String.join(",", interest);
+		}
+		
+		MemberVo vo = new MemberVo(memberId, memberPwd, memberPwd2, memberName, memberPhone, memberEmail, memberAddr, hobbys);
+		
+		//객체 이용해서 회원가입 진행 --> 이 작업이 insert와 같음
+		int result = new MemberService().join(vo);
+		
+		//insert 결과를 가지고 , 화면 선택
+		if(result == 1) {
+			//회원가입 성공 + 메세지 담기 -> 성공화면 선택, 다음타자에게 요청 떠넘기기 -> redirect로 해준다 -> 이래야 새로고침 시에 문제 안 생기니까 (why? url이 바뀌니까)
+			//회원가입을 할 때 아이디 패스워스 담아서 요청 보냈는데 새로고침 하면 url이 안 바뀌고 포워딩하면 똑같은 데이터를 다시 나한테 보내니까 그걸 방지하기 위한 것임
+			resp.sendRedirect("/semi");
+		}else {
+			//회원가입 실패 + 실패한 메세지-> 실패화면
+			System.out.println("[ERROR-CODE:" + result +  "] 회원가입 실패 !");
+			resp.sendRedirect("/semi/views/error/errorPage.jsp");
+		}
+		
+		
+//		
+		
+		
+		
 	}
 
 }

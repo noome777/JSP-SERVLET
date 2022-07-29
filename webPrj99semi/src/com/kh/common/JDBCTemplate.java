@@ -22,8 +22,8 @@ public class JDBCTemplate {
 		
 		String driver = prop.getProperty("driver");
 		String url = prop.getProperty("url");
-		String dbId = prop.getProperty("dbId");
-		String dbPwd = prop.getProperty("dbPwd");
+		String id = prop.getProperty("dbId");
+		String pwd = prop.getProperty("dbPwd");
 		
 //		String driver = "oracle.jdbc.driver.OracleDriver";
 //		String url ="jdbc:oracle:thin:@localhost:1521:xe";
@@ -33,7 +33,10 @@ public class JDBCTemplate {
 		
 		Class.forName(driver);
 		
-		Connection conn = DriverManager.getConnection(url, dbId, dbPwd);
+		Connection conn = DriverManager.getConnection(url, id, pwd);
+		//직접 커밋하기 위해 자동커밋을 꺼준다 
+		conn.setAutoCommit(false);
+		
 		return conn;
 	}
 	
