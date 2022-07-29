@@ -1,5 +1,9 @@
+<%@page import="com.kh.common.JDBCTemplate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	JDBCTemplate.getConnetion();
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +18,7 @@
 	사진게시판 - 게시판 리스트 조회(썸네일), 상세조회, 작성(첨부파일 업로드)
 	-->
 	
-	
+	<%@ include file="/views/common/header.jsp" %>
 	<h1>welcome !</h1>
 	
 	
