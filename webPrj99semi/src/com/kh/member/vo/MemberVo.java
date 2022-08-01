@@ -1,8 +1,8 @@
 package com.kh.member.vo;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
-	public class MemberVo {
+public class MemberVo {
 			
 	   public MemberVo() {
 		   

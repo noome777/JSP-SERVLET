@@ -41,6 +41,10 @@ public class memberJoinController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		//controller 
+		// -> 1. 브라우저에서 넘어온 데이터 꺼내기  2. 객체에 담기 (단순한 문자열 데이터들을 자바 데이터로 바꿔준다) // 3. 화면선택
+		
+		
 		req.setCharacterEncoding("UTF-8");
 		
 		String memberId = req.getParameter("memberId");
@@ -52,6 +56,7 @@ public class memberJoinController extends HttpServlet {
 		String memberAddr = req.getParameter("memberAddr");
 		String [] interest = req.getParameterValues("interest");
 		
+		//변수가 너무 많으므로 객체로 관리하기 -> memberVo
 		
 		//1. setter를 이용 -> 사람입장에서 편리
 //		MemberVo vo = new MemberVo();		

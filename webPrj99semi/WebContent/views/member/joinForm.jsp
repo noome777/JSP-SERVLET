@@ -20,6 +20,15 @@
 </style>
 </head>
 <body>
+
+<!-- 
+	view에서 controller로 데이터 넘기기 
+	화면(브라우저) -> 서버(톰캣) 데이터 넘기기
+	
+	1. form 태그 ->method를 post 방식으로도 가능함
+	2. url 입력-> 메소드 get 방식으로만 가능함 , query string (?id=abc%pwd=1234)
+-->
+
 	<%@include file="/views/common/header.jsp" %>
 	
 	<main>
