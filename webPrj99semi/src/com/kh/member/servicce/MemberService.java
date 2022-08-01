@@ -92,4 +92,39 @@ public class MemberService {
 		return loginMember;
 	}
 	
+	/*
+	 * 회원 정보 수정 
+	 * 
+	 */
+	public int edit(MemberVo vo) {
+//		 * - 비지니스 로직 (자바 || sql)
+		if(vo.getName().length() > 3) {
+			//문제 발생. 다음단계 진행 ㄴㄴ
+			return -1;
+		}
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try{
+			conn = JDBCTemplate.getConnetion();
+			result = new MemberDao().edit(conn, vo);
+			
+//		* - 트랜잭션 처리 (commit || rollback)
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		}catch(Exception e){
+			JDBCTemplate.rollback(conn);
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		
+//		 * - 실행결과 리턴
+		return result;
+	}
+	
 }

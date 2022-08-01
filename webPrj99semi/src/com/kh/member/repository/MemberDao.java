@@ -111,5 +111,45 @@ public class MemberDao {
 			
 			//만들어진 객체 리턴
 			return loginMember;
+			
 	}
+	
+	/*회원 정보 수정*/
+	public int edit(Connection conn, MemberVo vo) throws Exception {
+		
+		//SQL 준비
+		String sql = "UPDATE MEMBER SET NAME = ? , EMAIL = ? , PHONE = ? , ADDR = ? , INTEREST = ? ,MODIFY_DATE = SYSDATE WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			
+			//객체에 담고 완성하기
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getPhone());
+			pstmt.setString(4, vo.getAddr());
+			pstmt.setString(5, vo.getInterest());
+			pstmt.setInt(6, vo.getNo());
+			
+			//sql 실행 및 결과저장
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		//sql 실행결과 리턴
+		return result;
+	}
+	
+	
+	
+	
+//	 * DAO
+//	 * - SQL 실행 (전달받은 객체 활용)
+//	 * 		-SELECT 쿼리 -> rs를 객체로 변환
+//	 * 		- DML 쿼리 -> 추가작업 X, int로 반환
+//	 * - SQL 실행 결과 리턴
 }
