@@ -17,6 +17,7 @@ public class UserLogoutServlet extends HttpServlet {
 		//로그아웃 처리 == 세션 만료
 		HttpSession session = req.getSession();
 		//session.invalidate(); //세션만료
+		//req.getSession().invalidate();
 		
 		//로그아웃 했으므로, 인덱스 페이지 (메인화면) 보여주기
 		session.setAttribute("abc", "로그아웃 성공 !");

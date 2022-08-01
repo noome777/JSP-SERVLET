@@ -88,6 +88,7 @@ public class MemberDao {
 				Timestamp enrollDate = rs.getTimestamp("ENROLL_DATE");
 				Timestamp modifyDate = rs.getTimestamp("MODIFY_DATE");
 				
+				//자바의 변수에 위의 데이터들을 담기
 				loginMember = new MemberVo();
 				loginMember.setNo(no);
 				loginMember.setId(id);
@@ -101,14 +102,14 @@ public class MemberDao {
 				
 			}
 		}
-		
-		finally {
-			//자원반납
-			JDBCTemplate.close(pstmt);
-			JDBCTemplate.close(rs);
-		}
-		
-		//만들어진 객체 리턴
-		return loginMember;
+			
+			finally {
+				//자원반납
+				JDBCTemplate.close(pstmt);
+				JDBCTemplate.close(rs);
+			}
+			
+			//만들어진 객체 리턴
+			return loginMember;
 	}
 }

@@ -36,6 +36,7 @@ public class memberLoginController extends HttpServlet {
 //			HttpSession session = req.getSession();
 //			session.setAttribute("loginMember", loginMember);
 			req.getSession().setAttribute("loginMember", loginMember);
+			req.getSession().setAttribute("alertMsg","로그인 성공 !");
 			
 //			req.getRequestDispatcher("다음타자(성공화면)").forward(req, resp);
 //			req.getRequestDispatcher("/semi").forward(req, resp); --> 그런데 위에 세션에서 데이터를 저장하고 있으니까 굳이 포워딩으로 할 필요 없이 리다이렉트로 하면 됨
@@ -44,7 +45,8 @@ public class memberLoginController extends HttpServlet {
 		}else {
 			//로그인 실패
 //			req.getRequestDispatcher("다음타자(실패화면)").forward(req, resp);
-			req.getRequestDispatcher("").forward(req, resp);
+			req.setAttribute("errorMsg", "로그인 실패 !");
+			req.getRequestDispatcher("/views/error/errorPage.jsp").forward(req, resp);
 		}
 	}
 	
