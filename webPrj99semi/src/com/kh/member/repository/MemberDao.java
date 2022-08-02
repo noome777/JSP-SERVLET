@@ -136,6 +136,10 @@ public class MemberDao {
 			//sql 실행 및 결과저장
 			result = pstmt.executeUpdate();
 			
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+			
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}

@@ -57,6 +57,7 @@ public class MemberMypageController extends HttpServlet {
  	@Override
  	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
  		//데이터 받기 -> 객체
+ 		req.setCharacterEncoding("UTF-8");
  		String name = req.getParameter("memberName");
  		String Email = req.getParameter("memberEmail");
  		String Phone = req.getParameter("memberPhone");
@@ -86,7 +87,7 @@ public class MemberMypageController extends HttpServlet {
  			System.out.println("정보 수정 성공");
  		}else {
  			//실패화면
- 			System.out.println("정보 수정 실패");
+ 			System.out.println("[ERROR-CODE " + result + "]" + "정보 수정 실패");
  			
  		}
  		

@@ -98,8 +98,10 @@ public class MemberService {
 	 */
 	public int edit(MemberVo vo) {
 //		 * - 비지니스 로직 (자바 || sql)
-		if(vo.getName().length() > 3) {
+		System.out.println(vo.getName().length());
+		if(vo.getName().length() > 6) {
 			//문제 발생. 다음단계 진행 ㄴㄴ
+			System.out.println("한글은 3글자, 영어는 6글자 까지만 가능");
 			return -1;
 		}
 		
@@ -113,6 +115,8 @@ public class MemberService {
 //		* - 트랜잭션 처리 (commit || rollback)
 			if(result == 1) {
 				JDBCTemplate.commit(conn);
+				//다시한번 회원정보 조회 (회원번호)
+				MemberVo updateVo = selectOneByNo(vo.getNo());
 			}else {
 				JDBCTemplate.rollback(conn);
 			}
@@ -125,6 +129,19 @@ public class MemberService {
 		
 //		 * - 실행결과 리턴
 		return result;
+	}
+
+	
+	/*
+	 *	회원 정보 조회 (회원번호) 
+	 */
+	private MemberVo selectOneByNo(int no) {
+		Connection conn = null;
+		MemberVo vo = null;
+		
+		conn.getC
+		
+		MemberVo vo = new MemberDao.selectOneByNo(no);
 	}
 	
 }
