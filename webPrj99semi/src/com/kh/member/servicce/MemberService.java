@@ -65,7 +65,6 @@ public class MemberService {
 			JDBCTemplate.rollback(conn);
 			e.printStackTrace();
 		} finally {
-			
 			JDBCTemplate.close(conn);
 		}
 		
