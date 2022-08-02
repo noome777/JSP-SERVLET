@@ -65,6 +65,7 @@ public class MemberService {
 			JDBCTemplate.rollback(conn);
 			e.printStackTrace();
 		} finally {
+			
 			JDBCTemplate.close(conn);
 		}
 		
@@ -139,7 +140,7 @@ public class MemberService {
 		Connection conn = null;
 		MemberVo vo = null;
 		
-		conn.getC
+		
 		
 		MemberVo vo = new MemberDao.selectOneByNo(no);
 	}
