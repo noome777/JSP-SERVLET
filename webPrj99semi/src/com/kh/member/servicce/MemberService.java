@@ -2,7 +2,7 @@ package com.kh.member.servicce;
 
 import java.sql.Connection;
 
-import com.kh.common.JDBCTemplate;
+import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.repository.MemberDao;
 import com.kh.member.vo.MemberVo;
 
@@ -50,22 +50,22 @@ public class MemberService {
 		Connection conn = null;
 		int result = 0;
 		try {
-			conn = JDBCTemplate.getConnetion();
+			conn = getConnetion();
 			
 			result = new MemberDao().join(vo, conn);
 			
 			if(result == 1) {
-				JDBCTemplate.commit(conn);
+				commit(conn);
 			}else {
-				JDBCTemplate.rollback(conn);
+				rollback(conn);
 			}
 			
 		} catch (Exception e) {
 			//예외가 발생해도 롤백 해줘야하니까
-			JDBCTemplate.rollback(conn);
+			rollback(conn);
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(conn);
+			close(conn);
 		}
 		
 		
@@ -79,7 +79,7 @@ public class MemberService {
 		Connection conn = null;
 		MemberVo loginMember = null;
 		try {
-			conn = JDBCTemplate.getConnetion();
+			conn = getConnetion();
 			
 			//SQL 실행결과 리턴
 			loginMember = new MemberDao().login(conn, vo);
@@ -96,39 +96,47 @@ public class MemberService {
 	 * 회원 정보 수정 
 	 * 
 	 */
-	public int edit(MemberVo vo) {
-//		 * - 비지니스 로직 (자바 || sql)
-		System.out.println(vo.getName().length());
+	public MemberVo edit(MemberVo vo) {
+//		 * 1. 비지니스 로직 (자바 || sql)
+//		System.out.println(vo.getName().length());
+		
+		//자바
 		if(vo.getName().length() > 6) {
 			//문제 발생. 다음단계 진행 ㄴㄴ
 			System.out.println("한글은 3글자, 영어는 6글자 까지만 가능");
-			return -1;
+			//리턴값이 1이면 성공, 1이 아니면 실패
+//			return -1;
+			return null;
 		}
+		
+		//SQL -> DAO 호출하기
+//		new MemberDao().edit(conn, vo);
 		
 		Connection conn = null;
 		int result = 0;
+		MemberVo updateVo = null;
 		
 		try{
-			conn = JDBCTemplate.getConnetion();
+			conn = getConnetion();
 			result = new MemberDao().edit(conn, vo);
 			
-//		* - 트랜잭션 처리 (commit || rollback)
+//		* 2. 트랜잭션 처리 (commit || rollback)
 			if(result == 1) {
-				JDBCTemplate.commit(conn);
+				commit(conn);
 				//다시한번 회원정보 조회 (회원번호)
-				MemberVo updateVo = selectOneByNo(vo.getNo());
+				updateVo = selectOneByNo(vo.getNo());
 			}else {
-				JDBCTemplate.rollback(conn);
+				rollback(conn);
 			}
 		}catch(Exception e){
-			JDBCTemplate.rollback(conn);
+			rollback(conn);
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
+			close(conn);
 		}
 		
-//		 * - 실행결과 리턴
-		return result;
+//		 * 3. 실행결과 리턴
+		return updateVo;
 	}
 
 	
@@ -139,9 +147,92 @@ public class MemberService {
 		Connection conn = null;
 		MemberVo vo = null;
 		
+		try {
+			conn = getConnetion();
+			vo = new MemberDao().selectOneByNo(conn, no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
 		
 		
-		MemberVo vo = new MemberDao.selectOneByNo(no);
+		return vo;
 	}
+
+	/*
+	 * 회원 탈퇴
+	 *  
+	 */
+	
+	public MemberVo quit(MemberVo vo) {
+		Connection conn = null;
+		int result = 0;
+		MemberVo quitVo = null;
+		
+		//1. 비지니스 로직 처리(자바 || sql)
+//		new MemberDao().quit(conn, quitVo);
+		
+		//2. 트랜잭션 처리
+		try {
+			conn = getConnetion();
+			result = new MemberDao().quit(conn, vo);
+			
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return quitVo;
+	}
+
+	/*
+	 * 비밀번호 변경
+	 * */
+	public int changePwd(String memberId, String memberPwd, String memberPwdNew, String memberPwdNew2) {
+		//1. 서비스 로직 작성
+		if(memberPwdNew.equals(memberPwdNew2) == false) {
+			System.out.println("신규 비밀번호가 일치하지 않음");
+			return -1;
+		}
+		if(memberPwd.length() < 4) {
+			System.out.println("비밀번호가 4자리 미만임");
+			return -2;
+		}
+		
+		//2. dao 호출 (sql 실행)
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnetion();
+			result = new MemberDao().changePwd(memberId, memberPwd, memberPwdNew, conn);
+			
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		
+			
+		} catch (Exception e) {
+			rollback(conn);
+		} finally {
+			close(conn);
+		}		
+		
+		return result;
+		
+	}
+
 	
 }

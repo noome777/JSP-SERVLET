@@ -17,6 +17,14 @@
 		color: white;
 	}
 
+	#pwdFormOuter {
+		display: flex;
+		justify-content: center;
+	}
+	#pwdFormOuter td:last-child{
+		display: flex;
+		justify-content: right;
+	}
 
 </style>
 </head>
@@ -35,6 +43,7 @@
 	<main>
 		<h1 align="center">마이페이지</h1>
 		<form action="/semi/member/myPage" method="post">
+		<!--사용자쪽에서는 안 보이지만 서블릿에서는 넘버가 보이도록 설정  -->
 			<input type="hidden" value="<%=loginMember.getNo()%>" name="memberNo">
 			<table>
 				<tr>
@@ -79,10 +88,10 @@
 				</tr>
 
 				<tr>
-					<td><input type="submit" id="" value="정보변경"></td>
+					<td><input type="submit" id="" value="정보변경" class="btn btn-primary"></td>
 					<td>
-						<input type="button" id=""  value="비밀번호변경">
-						<input type="button" id=""  value="회원탈퇴">
+						<input type="button" id=""  value="비밀번호변경" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pwdChange">
+						<input type="button" onclick="location.href ='/semi/member/quit'"  id=""  value="회원탈퇴" class="btn btn-danger">
 					</td>
 					
 				</tr>
@@ -92,6 +101,53 @@
 		</form>
 	</main>
 
+	
+	<!-- The Modal -->
+	<div class="modal" id="pwdChange">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Modal Heading</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      	<div id="pwdFormOuter">
+	      		 <form action="<%=contextPath%>/member/pwd" method="post">
+	      			<input type="hidden" name="memberId" value="<%=loginMember.getId()%>">
+			       	<table>
+				       	<tr>
+				       		<td>기존 비밀번호</td>
+				       		<td><input type="password" name="memberPwd"> </td>
+				       	</tr>
+				       	<tr>
+				       		<td>신규 비밀번호</td>
+				       		<td><input type="password" name="memberPwdNew"> </td>
+				       	</tr>
+				       	<tr>
+				       		<td>신규 비밀번호 확인</td>
+				       		<td><input type="password" name="memberPwdNew2"> </td>
+				       	</tr>
+				       	
+				       	<tr>
+							<td colspan="2">
+								<input type="submit" value="변경하기">
+							</td>
+				       	</tr>
+			       	</table>
+	     		 </form>
+	      	</div>
+	      </div>
+	
+	
+	    </div>
+	  </div>
+	</div>
+	
+	
 	<script>
 	
 		$(function(){
@@ -106,9 +162,15 @@
 				/*this.checked = true;*/
 				
 				var result = interest.includes(this.value);
-				console.log(result);
 				
-				if(result == true) this.checked = true;
+				if(result == true) {
+					this.checked = true;
+				}
+				
+				/* var result = interest.indexOf(this.value);
+				if(result != -1){
+					this.checked = true;
+				} */
 				
 			});
 			
