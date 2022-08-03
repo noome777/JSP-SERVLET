@@ -61,13 +61,18 @@ public class MemberMypageController extends HttpServlet {
 
  	@Override
  	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
- 		//1. 데이터 받기 -> 객체
  		req.setCharacterEncoding("UTF-8");
+
+ 		//1. 데이터 받기 -> 객체
  		String name = req.getParameter("memberName");
  		String Email = req.getParameter("memberEmail");
  		String Phone = req.getParameter("memberPhone");
  		String Addr = req.getParameter("memberAddr");
  		String[] interest = req.getParameterValues("interest");
+ 		if(interest == null) {
+ 			interest = new String[]{""};
+ 		}
+ 		
  		int no = ((MemberVo) req.getSession().getAttribute("loginMember")).getNo();
  		
 // 		HttpSession session = req.getSession();
@@ -92,7 +97,7 @@ public class MemberMypageController extends HttpServlet {
  			//성공화면
  			//세션에 들어있는 로그인 멤버의 정보를 업데이트
  			req.getSession().setAttribute("loginMember", updateVo);
- 			
+ 			req.getSession().setAttribute("alertMsg", "회원 정보 수정 완료 !");
  			//다시한번 마이페이지로 보내주기
  			resp.sendRedirect("/semi/member/myPage");
  			

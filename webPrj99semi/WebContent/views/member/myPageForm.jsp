@@ -101,11 +101,11 @@
 		</form>
 	</main>
 
-	
-	<!-- The Modal -->
-	<div class="modal" id="pwdChange">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
+		
+		<!-- The Modal -->
+		<div class="modal" id="pwdChange">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
 	
 	      <!-- Modal Header -->
 	      <div class="modal-header">
@@ -115,38 +115,48 @@
 	
 	      <!-- Modal body -->
 	      <div class="modal-body">
-	      	<div id="pwdFormOuter">
-	      		 <form action="<%=contextPath%>/member/pwd" method="post">
-	      			<input type="hidden" name="memberId" value="<%=loginMember.getId()%>">
-			       	<table>
-				       	<tr>
-				       		<td>기존 비밀번호</td>
-				       		<td><input type="password" name="memberPwd"> </td>
-				       	</tr>
-				       	<tr>
-				       		<td>신규 비밀번호</td>
-				       		<td><input type="password" name="memberPwdNew"> </td>
-				       	</tr>
-				       	<tr>
-				       		<td>신규 비밀번호 확인</td>
-				       		<td><input type="password" name="memberPwdNew2"> </td>
-				       	</tr>
-				       	
-				       	<tr>
-							<td colspan="2">
-								<input type="submit" value="변경하기">
-							</td>
-				       	</tr>
-			       	</table>
-	     		 </form>
-	      	</div>
+		      	<div id="pwdFormOuter">
+		      		 <form action="<%=contextPath%>/member/pwd" method="post">
+		      			<input type="hidden" name="memberId" value="<%=loginMember.getId()%>">
+				       	<table>
+					       	<tr>
+					       		<td>기존 비밀번호</td>
+					       		<td><input type="password" name="memberPwd"> </td>
+					       	</tr>
+					       	<tr>
+					       		<td>신규 비밀번호</td>
+					       		<td><input type="password" name="memberPwdNew"> </td>
+					       	</tr>
+					       	<tr>
+					       		<td>신규 비밀번호 확인</td>
+					       		<td><input type="password" name="memberPwdNew2"> </td>
+					       	</tr>
+					       	
+					       	<tr>
+								<td colspan="2">
+									<input type="submit" value="변경하기" onclick="return checkPwd();">
+								</td>
+					       	</tr>
+				       	</table>
+		     		 </form>
+		      	</div>
 	      </div>
-	
-	
 	    </div>
 	  </div>
 	</div>
 	
+	<script>
+		function checkPwd(){
+			isSame = $('input[name=memberPwdNew]').val() == $('input[name=memberPwdNew2]').val();
+			if(isSame){
+				return true;
+			}else{
+				alert('신규 비밀번호가 일치하지 않습니다.');
+				return false;
+			}
+		}
+		
+	</script>
 	
 	<script>
 	

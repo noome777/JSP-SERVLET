@@ -166,7 +166,7 @@ public class MemberService {
 	 *  
 	 */
 	
-	public MemberVo quit(MemberVo vo) {
+	public int quit(MemberVo vo) {
 		Connection conn = null;
 		int result = 0;
 		MemberVo quitVo = null;
@@ -192,7 +192,7 @@ public class MemberService {
 			close(conn);
 		}
 		
-		return quitVo;
+		return result;
 	}
 
 	/*

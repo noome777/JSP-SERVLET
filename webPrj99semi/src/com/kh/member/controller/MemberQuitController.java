@@ -24,15 +24,15 @@ public class MemberQuitController extends HttpServlet {
 		vo.setNo(no);
 		
 		//2. 서비스 호출 -> 딱히 없음
-		MemberVo quitVo =  new MemberService().quit(vo);
+		int result =  new MemberService().quit(vo);
 		
 		//3. 실행 결과에 따라 화면 선택
-		if(quitVo == null) {
+		if(result == 1) {
 //			req.setAttribute("alertMsg", "회원 탈퇴 성공");
 //			req.getRequestDispatcher("/").forward(req, resp);
 			
 			req.setAttribute("alertMsg", "회원 탈퇴 성공!");
-			resp.sendRedirect("/semi/member/myPage");
+			resp.sendRedirect("/semi");
 			
 			System.out.println("회원 탈퇴 성공");
 			
