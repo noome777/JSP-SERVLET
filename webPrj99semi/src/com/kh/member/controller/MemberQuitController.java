@@ -29,13 +29,16 @@ public class MemberQuitController extends HttpServlet {
 		//3. 실행 결과에 따라 화면 선택
 		if(result == 1) {
 //-----------------> 질문
-			req.setAttribute("alertMsg", "회원 탈퇴 성공!");
 			
 			//우선 로그아웃
 			req.getSession().invalidate();
 			
-			//메인으로 가기 -> redirect -> 로그아웃 했으므로 클라이언트에게 다시 요청을 보내라고 하기 위해
-			resp.sendRedirect("/semi");
+		
+			req.setAttribute("Msg", "회원 탈퇴 성공!");
+			req.getRequestDispatcher("/views/common/header.jsp").forward(req, resp);
+			
+			//메인으로 가기 -> redirect -> 로그아웃 했으므로 클라이언트에게 다시 요청을 보내라고 하기 위해 -> 이걸로 해봤는데 안됨..
+//			resp.sendRedirect("/views/common/header.jsp");
 			
 			System.out.println("회원 탈퇴 성공");
 			

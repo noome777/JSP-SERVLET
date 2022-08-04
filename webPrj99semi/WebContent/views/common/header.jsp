@@ -9,6 +9,10 @@
 	//새로고침 또 한번 했을 때 계속 로그인 성공 창이 뜨는 게 아니라 이후에는 null값이 뜨게 된다. 따라서 밑에서 null 처리 불가피함.
 	session.removeAttribute("alertMsg");
 	
+	
+	//회원탈퇴는 session이 사라진 상태이므로, Msg를 header 영역에 다시 보내줘야함. 
+	String Msg = (String)request.getAttribute("Msg");
+	
 	String contextPath = request.getContextPath();
 	
 %>
@@ -113,6 +117,12 @@
 	/* 여기서  null처리를 해주기 때문에 이제 새로고침 해도 로그인 성공! 이나 null이 alert 되지 않는다. */
 	<%if(alertMsg != null) {%>
 		alert('<%=alertMsg%>');
+	<%}%>
+	</script>
+	
+	<script>
+	<%if(Msg != null) {%>
+		alert('<%=Msg%>');
 	<%}%>
 	</script>
 
