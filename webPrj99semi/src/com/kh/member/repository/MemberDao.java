@@ -210,7 +210,7 @@ public class MemberDao {
 		
 		//sql 준비
 //		String sql = "UPDATE MEMBER SET STATUS = 'Y' , MODIFY_DATE = SYSDATE WHERE NO = ?";
-		String sql = "DELETE FROM MEMBER STATUS = 'Y' , MODIFY_DATE = SYSDATE WHERE NO = ?";
+		String sql = "DELETE FROM MEMBER WHERE NO = ?";
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
