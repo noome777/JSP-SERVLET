@@ -1,5 +1,16 @@
+<%@page import="com.kh.notice.vo.NoticeVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	ArrayList<NoticeVo> voList = (ArrayList<NoticeVo>) request.getAttribute("voList");
+    
+    //for문에서 이제 list에 있는 거 빼준다. -> 테이블로
+    
+   		
+    
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +48,10 @@
 		margin-top: 50px;
 
 	}
+	#table-main>tbody tr:hover{
+		background-color: darkgray;
+		cursor: pointer;
+	}
 
 </style>
 </head>
@@ -47,40 +62,34 @@
 
 		<h1>공지사항</h1>
 		
-		<%if(loginMember != null && "ADMIN".equals(loginMember.getId())){ %>
-			<button id="write">공지사항 작성</button>
+		<%if(loginMember != null && "admin".equals(loginMember.getId())){ %>
+			<button id="write" onclick="location.href='/semi/notice/insert'">공지사항 작성</button>
 		<%}%>
 
 		<table id="table-main">
 			
-	
-			<tr>
-				<td>글번호</td>
-				<td>글제목</td>
-				<td>작성자</td>
-				<td>조회수</td>
-				<td>작성일</td>
-	
-	
-			</tr>
-			<tr>
-				<td>100</td>
-				<td>제목01</td>
-				<td>관리자01</td>
-				<td>30</td>
-				<td>2022-08-03</td>
-	
-	
-			</tr>
-			<tr>
-				<td>200</td>
-				<td>제목02</td>
-				<td>관리자02</td>
-				<td>222</td>
-				<td>2121-21-21</td>
-	
-	
-			</tr>
+			<thead>
+				<tr>
+					<td>글번호</td>
+					<td>글제목</td>
+					<td>작성자</td>
+					<td>조회수</td>
+					<td>작성일</td>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<%for(int i = 0; i < voList.size(); i++){ %>
+					<tr>
+						<td><%= voList.get(i).getNo() %></td>
+						<td><%= voList.get(i).getTitle() %></td>
+						<td><%= voList.get(i).getWriter() %></td>
+						<td><%= voList.get(i).getCnt() %></td>
+						<td><%= voList.get(i).getEnrollDate() %></td>
+					</tr>
+				<%} %>
+			</tbody>
+			
 		</table>
 	</div>
 </body>
