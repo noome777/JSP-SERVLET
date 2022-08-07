@@ -85,7 +85,6 @@ public class MemberService {
 			loginMember = new MemberDao().login(conn, vo);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

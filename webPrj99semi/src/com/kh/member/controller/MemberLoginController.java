@@ -13,7 +13,7 @@ import com.kh.member.servicce.MemberService;
 import com.kh.member.vo.MemberVo;
 
 @WebServlet(urlPatterns = "/member/login")
-public class memberLoginController extends HttpServlet {
+public class MemberLoginController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

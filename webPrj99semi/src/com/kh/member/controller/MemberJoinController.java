@@ -12,7 +12,7 @@ import com.kh.member.servicce.MemberService;
 import com.kh.member.vo.MemberVo;
 
 @WebServlet(urlPatterns = "/member/join")
-public class memberJoinController extends HttpServlet {
+public class MemberJoinController extends HttpServlet {
 	
 	
 	//화면 보여주는건(로그인화면, 회원가입화면) get 방식 요청이니까 doGet으로 , 
@@ -56,6 +56,14 @@ public class memberJoinController extends HttpServlet {
 		String memberAddr = req.getParameter("memberAddr");
 		String [] interest = req.getParameterValues("interest");
 		
+		
+
+		//취미 선택 없을 경우 방어코드 ->null일 경우 string.join 해주면 안 되니까
+		String hobbys = "";
+		if(interest != null) {
+			hobbys = String.join(",", interest);
+		}
+		
 		//변수가 너무 많으므로 객체로 관리하기 -> memberVo
 		
 		//1. setter를 이용 -> 사람입장에서 편리
@@ -71,12 +79,6 @@ public class memberJoinController extends HttpServlet {
 		
 		//2. 생성자를 이용 (객체가 태어날 때부터 데이터를 들고 객체를 만들면서 태어나니까 무결성, 안전성으로 인해 좋은 것임)-> 컴퓨터 입장에서 좋음
 		
-		//취미 선택 없을 경우 방어코드 ->null일 경우 string.join 해주면 안 되니까
-		String hobbys = "";
-		if(interest != null) {
-			hobbys = String.join(",", interest);
-		}
-		
 		MemberVo vo = new MemberVo(memberId, memberPwd, memberPwd2, memberName, memberPhone, memberEmail, memberAddr, hobbys);
 		
 		//객체 이용해서 회원가입 진행 --> 이 작업이 insert와 같음
@@ -85,7 +87,7 @@ public class memberJoinController extends HttpServlet {
 		//insert 결과를 가지고 , 화면 선택
 		if(result == 1) {
 			//회원가입 성공 + 메세지 담기 -> 성공화면 선택, 다음타자에게 요청 떠넘기기 -> redirect로 해준다 -> 이래야 새로고침 시에 문제 안 생기니까 (why? url이 바뀌니까)
-			//회원가입을 할 때 아이디 패스워스 담아서 요청 보냈는데 새로고침 하면 url이 안 바뀌고 포워딩하면 똑같은 데이터를 다시 나한테 보내니까 그걸 방지하기 위한 것임
+			//포워딩으로 하면 회원가입을 할 때 아이디 패스워스 담아서 요청 보냈는데 새로고침 하면 url이 안 바뀌고 포워딩하면 똑같은 데이터를 다시 나한테 보내니까 그걸 방지하기 위한 것임
 			resp.sendRedirect("/semi");
 		}else {
 			//회원가입 실패 + 실패한 메세지-> 실패화면

@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	
+	main table{
+		margin: 0 auto;
+	}
+
+	main{
+		background-color: black;
+		color: white;
+	}
+
+
+</style>
+</head>
+<body>
+
+<!-- 
+	view에서 controller로 데이터 넘기기 
+	화면(브라우저) -> 서버(톰캣) 데이터 넘기기
+	
+	1. form 태그 ->method를 post 방식으로도 가능함
+	2. url 입력-> 메소드 get 방식으로만 가능함 , query string (?id=abc%pwd=1234)
+-->
+
+	<%@include file="/views/common/header.jsp" %>
+	
+	<main>
+		<h1 align="center">회원가입</h1>
+		<form action="/lars/member/join" method="post">
+			<table>
+				<tr>
+					<td>* 아이디</td>
+					<td><input type="text" name="memberId" maxlength="10" required></td>
+					<td><button>중복확인</button></td>
+				</tr>
+				<tr>
+					<td>* 비밀번호</td>
+					<td><input type="password" name="memberPwd" maxlength="10" required></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>* 비밀번호 확인</td>
+					<td><input type="password" name="memberPwd2" required></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>* 이름</td>
+					<td><input type="text" name="memberName" maxlength="3" required></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>전화번호</td>
+					<td><input type="tel" name="memberPhone" placeholder="- 없이 입력"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="email" name="memberEmail"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td><input type="text" name="memberAddr"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>관심분야</td>
+					<td>
+						<input type="checkbox" name="interest" value="game" id="game">
+						<label for="game">게임</label>
+						<input type="checkbox" name="interest" value="workout" id="workout">
+						<label for="game">운동</label>
+						<input type="checkbox" name="interest" value="cook" id="cook">
+						<label for="game">요리</label>	
+						<br>
+						<input type="checkbox" name="interest" value="music" id="music">
+						<label for="game">음악</label>
+						<input type="checkbox" name="interest" value="book" id="book">
+						<label for="game">독서</label>
+						<input type="checkbox" name="interest" value="darw" id="darw">
+						<label for="game">그림</label>
+						
+					</td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><input id="joinBtn" type="submit" value="회원가입"></td>
+					<td></td>
+					
+				</tr>
+			</table>
+
+
+		</form>
+	</main>
+
+	
+
+
+	
+	
+	
+</body>
+</html>
