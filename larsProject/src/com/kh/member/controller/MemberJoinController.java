@@ -53,6 +53,7 @@ public class MemberJoinController extends HttpServlet {
 		vo.setAddr(memberAddr);
 		vo.setInterest(String.join(",", interest));
 		
+		//null처리 해주기
 		String hobbys = "";
 		if(interest != null) {
 			hobbys = String.join(",", interest);
