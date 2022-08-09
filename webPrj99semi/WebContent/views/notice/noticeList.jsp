@@ -92,5 +92,20 @@
 			
 		</table>
 	</div>
+	
+	<script>
+		$(function(){
+			$('#table-main>tbody>tr').click(function(){
+				//행 클릭되었을 때, 동작할 내용
+				
+				//글 번호 가져오기 (this -> tr태그)
+				const num = $(this).children().eq(0).text();
+				console.log(num);
+				//해당 번호로 요청 보내기
+				location.href='/semi/notice/detail?num=' + num;
+				
+			});
+		})
+	</script>
 </body>
 </html>
