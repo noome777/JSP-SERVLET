@@ -33,6 +33,7 @@ public class NoticeList extends HttpServlet {
 		//db에서 조회수 같은 거 받아서 반영을 해줘야하니까 db에서 조회한 데이터가 voList에 담겨진다.
 		req.setAttribute("voList", voList);
 		//화면 보여주기 (연막)-> 클라이언트는 /notice/list로 가지만, 그러나 사실은 밑의 주소를 가진 JSP 파일로 포워딩해주는 -> noticeList.jsp의 스크립틀릿으로 이동
+		//포워딩 사용 하는 이유는 데이터를 담고 있어서도 있지만, 그냥 디렉토리 구조(실제의 경로) 숨기기 위함
 		req.getRequestDispatcher("/views/notice/noticeList.jsp").forward(req, resp);
 		
 	}
