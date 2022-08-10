@@ -10,32 +10,36 @@ import java.util.Properties;
 
 public class JDBCTemplate {
 	
-	public static Connection getConnetion() throws Exception {
-		
+	public static Connection getConnetion() {
 
-		Properties prop = new Properties();
-		
-		String filePath = JDBCTemplate.class.getResource("/db/setup/data.properties").getPath();
-//		System.out.println("가져온 경로 확인 ::: " + JDBCTemplate.class.getResource("/").getPath());
-		
-		prop.load(new FileInputStream(filePath));
-		
-		String driver = prop.getProperty("driver");
-		String url = prop.getProperty("url");
-		String id = prop.getProperty("dbId");
-		String pwd = prop.getProperty("dbPwd");
-		
-//		String driver = "oracle.jdbc.driver.OracleDriver";
-//		String url ="jdbc:oracle:thin:@localhost:1521:xe";
-//		String dbId = "C##KH";
-//		String dbPwd = "KH";
-		
-		
-		Class.forName(driver);
-		
-		Connection conn = DriverManager.getConnection(url, id, pwd);
-		//직접 커밋하기 위해 자동커밋을 꺼준다 
-		conn.setAutoCommit(false);
+		Connection conn = null;
+		try {
+			Properties prop = new Properties();
+			
+			String filePath = JDBCTemplate.class.getResource("/db/setup/data.properties").getPath();
+//			System.out.println("가져온 경로 확인 ::: " + JDBCTemplate.class.getResource("/").getPath());
+			
+			prop.load(new FileInputStream(filePath));
+			
+			String driver = prop.getProperty("driver");
+			String url = prop.getProperty("url");
+			String id = prop.getProperty("dbId");
+			String pwd = prop.getProperty("dbPwd");
+			
+//			String driver = "oracle.jdbc.driver.OracleDriver";
+//			String url ="jdbc:oracle:thin:@localhost:1521:xe";
+//			String dbId = "C##KH";
+//			String dbPwd = "KH";
+			
+			
+			Class.forName(driver);
+			
+			conn = DriverManager.getConnection(url, id, pwd);
+			//직접 커밋하기 위해 자동커밋을 꺼준다 
+			conn.setAutoCommit(false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		
 		return conn;
 	}
