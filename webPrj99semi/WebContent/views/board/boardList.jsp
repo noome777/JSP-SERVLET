@@ -1,5 +1,17 @@
+<%@page import="com.kh.board.vo.BoardVo"%>
+<%@page import="com.kh.common.PageVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+ 	List<BoardVo> voList = (List) request.getAttribute("list");
+ 	PageVo pv = (PageVo) request.getAttribute("pv");
+ 	
+ 	int currentPage = pv.getCurrentPage();
+ 	int startPage = pv.getStartPage();
+ 	int endPage = pv.getEndPage();
+ 	int maxPage = pv.getMaxPage();
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,34 +53,31 @@
         <h1 align="center">게시글 조회</h1>
 
         <table border="1">
-            <!-- 글번호, 제목, 작성자, 조회수, 작성일시 -->
+            <!-- 글번호, 카테고리, 제목, 작성자, 조회수, 작성일시 -->
             <tr>
                 <th>글번호</th>
+                <th>카테고리</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>조회수</th>
                 <th>작성일시</th>
             </tr>
-            <tr>
-                <td>0</td>
-                <td>임시제목</td>
-                <td>하드코딩</td>
-                <td>777</td>
-                <td>2022-08-10</td>
-            </tr>
+            <%for(BoardVo b : voList){ %>
+	            <tr>
+	                <td><%=b.getNo() %></td>
+	                <td><%=b.getCategory() %></td>
+	                <td><%=b.getTitle() %></td>
+	                <td><%=b.getWriter() %></td>
+	                <td><%=b.getCnt() %></td>
+	                <td><%=b.getEnrollDate() %></td>
+	            </tr>
+            <%} %>
         </table>
 
         <div id="page-area">
-            <a>1</a>
-            <a>2</a>
-            <a>3</a>
-            <a>4</a>
-            <a>5</a>
-            <a>6</a>
-            <a>7</a>
-            <a>8</a>
-            <a>9</a>
-            <a>10</a>
+        	<% for(int i = startPage; i <= endPage; i++){ %>
+            <a><%=i %></a>
+            <%} %>
         </div>
 
    </div>
