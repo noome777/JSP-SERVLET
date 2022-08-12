@@ -3,10 +3,12 @@ package com.kh.board.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.board.vo.BoardVo;
+import com.kh.category.vo.CategoryVo;
 import com.kh.common.PageVo;
 
 import static com.kh.common.JDBCTemplate.*;
@@ -109,6 +111,69 @@ public class BoardDao {
 			close(pstmt);
 			close(rs);
 		}
+		
+		//결과 리턴
+		return list;
+	}
+
+	/*
+	 * 카테고리 정보(리스트) 조회 
+	 */
+	public List<CategoryVo> selectCategoryList(Connection conn) {
+		
+		//conn 준비
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<CategoryVo> list = new ArrayList<CategoryVo>();
+		
+		//sql 준비
+		String sql = "SELECT CATEGORY_NO, CATEGORY_NAME FROM CATEGORY";
+		
+		try {
+			//sql 객체에 담기 및 쿼리 완성
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			//여러개의 행을 가져올 거니까 while문 사용
+			while(rs.next()) {
+				//1
+//				String no = rs.getString("CATEGORY_NO");
+//				String name = rs.getString("CATEGORY_NAME");
+				
+//				CategoryVo vo = new CategoryVo();
+//				vo.setCategoryNo(no);
+//				vo.setCategoryName(name);
+				
+				//2
+//				CategoryVo vo = new CategoryVo();
+//				vo.setCategoryNo(rs.getString("CATEGORY_NO"));
+//				vo.setCategoryName(rs.getString("CATEGORY_NAME"));
+				
+				//3
+				//생성자 이용해서 생성되는 순간 값이 채워짐 -> setter 필요 없어짐
+//				CategoryVo vo = new CategoryVo(
+//						rs.getString("CATEGORY_NO"),
+//						rs.getString("CATEGORY_NAME")
+//						);
+				
+				//4
+				list.add(new CategoryVo(rs.getString("CATEGORY_NO"),rs.getString("CATEGORY_NAME")
+						));
+			}
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		//sql 실행 및 결과 저장
+		
+		//rs -> java
 		
 		//결과 리턴
 		return list;

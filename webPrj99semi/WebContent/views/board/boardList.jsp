@@ -51,6 +51,13 @@
    <div id="outer">
    
         <h1 align="center">게시글 조회</h1>
+        
+        <!-- 로그인 한 사람만 글쓰기 버튼이 보이게 해주기 -->
+        <div style="text-align: right; width: 95%">
+        <%if(loginMember != null){%>
+	        <a class="btn btn-primary" href="<%=contextPath%>/board/insert">글쓰기</a>
+	        <%} %>
+        </div>
 
         <table border="1">
             <!-- 글번호, 카테고리, 제목, 작성자, 조회수, 작성일시 -->
@@ -75,9 +82,28 @@
         </table>
 
         <div id="page-area">
+        
+        	<!--현재 페이지가 1이 아닐때만 이전 버튼이 만들어지게  -->
+        	<%if(currentPage != 1){ %>
+	        	<a class="btn btn-sm btn-primary" href="<%=contextPath%>/board/list?p=<%=currentPage-1%>"> &lt; </a>
+        	<%} %>
+        	
+        	
         	<% for(int i = startPage; i <= endPage; i++){ %>
-            <a><%=i %></a>
+        	<!-- 현재페이지에서 새로고침시에도 활성화 되지 않게 -->
+        		<%if(i == currentPage) {%>
+        			<a class="btn btn-sm btn-primary"><%=i %></a>
+        			<%} else {%>
+            		<a class="btn btn-sm btn-primary" href="<%=contextPath %>/board/list?p=<%=i%>"><%=i %></a>
+        			<%} %>
             <%} %>
+            
+            <!--현재 페이지가 maxPage가 아닐때만 다음 버튼이 만들어지게  -->
+            <%if(currentPage != maxPage){ %>
+	        	<a class="btn btn-sm btn-primary" href="<%=contextPath%>/board/list?p=<%=currentPage+1%>"> &gt; </a>
+        	<%} %>
+        	
+            
         </div>
 
    </div>

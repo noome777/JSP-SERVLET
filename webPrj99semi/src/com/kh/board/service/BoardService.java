@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.board.repository.BoardDao;
 import com.kh.board.vo.BoardVo;
+import com.kh.category.vo.CategoryVo;
 import com.kh.common.PageVo;
 
 import static com.kh.common.JDBCTemplate.*;
@@ -55,6 +56,16 @@ public class BoardService {
 		close(conn);
 
 		return voList;
+	}
+
+	/*
+	 * 카테고리 정보(리스트) 조회 
+	 */
+	public List<CategoryVo> selectCategoryList() {
+		Connection conn = getConnetion();
+		List<CategoryVo> list = dao.selectCategoryList(conn);
+		close(conn);
+		return list;
 	}
 
 }
