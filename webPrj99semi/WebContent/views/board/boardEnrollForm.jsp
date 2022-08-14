@@ -57,6 +57,7 @@
                             <option value="60">독서</option>
                             <option value="70">그림</option> -->
                             
+                            
                             <%for(CategoryVo c : list){ %>
                             <option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName() %></option>
                             <%} %>
