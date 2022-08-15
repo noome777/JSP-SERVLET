@@ -40,7 +40,8 @@
         <h2 align="center">일반게시판 작성하기</h2>
         <br>
 
-        <form id="enroll-form" action="/board/insert" method="post" enctype="multipart/form-data">
+		<!-- enctype="multipart/form-data"는 binary 형태로 파일 자체를 보내주는 것이다. -->
+        <form id="enroll-form" action="<%=contextPath %>/board/insert" method="post" enctype="multipart/form-data">
 
             <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
             <table>

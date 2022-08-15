@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.attachment.vo.AttachmentVo;
 import com.kh.board.vo.BoardVo;
 import com.kh.category.vo.CategoryVo;
 import com.kh.common.PageVo;
@@ -177,6 +178,71 @@ public class BoardDao {
 		
 		//결과 리턴
 		return list;
+	}
+
+
+	/*
+	 * 게시글 작성 (BOARD 테이블만 채워줌)
+	 */
+	public int insertBoard(Connection conn, BoardVo bvo) {
+		//conn 준비
+		
+		//sql 준비
+		String sql = "INSERT INTO BOARD ( NO ,TYPE ,CATEGORY_NO ,TITLE ,CONTENT ,WRITER ) VALUES ( SEQ_BOARD_NO.NEXTVAL ,1 ,? ,? ,? ,? )";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			//sql 담을 객체 준비 및 쿼리 작성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bvo.getCategory());
+			pstmt.setString(2, bvo.getTitle());
+			pstmt.setString(3, bvo.getContent());
+			pstmt.setString(4, bvo.getWriter());
+			
+			//sql 실행 및 결과 저장
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		//실행 결과 리턴
+		return result;
+		
+	}
+
+	/*
+	 * 게시글 작성 (ATTACHMENT 테이블만 채워줌)
+	 */
+	public int insertAttachment(Connection conn, AttachmentVo avo) {
+		
+		String sql = "INSERT INTO ATTACHMENT ( NO ,REF_BNO ,ORIGIN_NAME ,CHANGE_NAME ,FILE_PATH ) VALUES ( SEQ_ATTACHMENT_NO.NEXTVAL ,SEQ_BOARD_NO.CURRVAL ,? ,? ,? )";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, avo.getOriginName());
+			pstmt.setString(2, avo.getChangeName());
+			pstmt.setString(3, avo.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
