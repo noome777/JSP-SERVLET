@@ -64,8 +64,8 @@
 	<h3>${param.num eq 10 }</h3>
 	<h3>${param.num ne 10 }</h3>
 	
-	<h3>비어있는지 ?? ${empty param.num}</h3>
-	<h3>${empty param.num ? "숫자를 입력해주세요" : (전달받은 숫자"}</h3>
+	<h3>${empty param.num}</h3>
+	
 	
 </body>
 </html>
