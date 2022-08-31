@@ -17,13 +17,16 @@ public class MemberDao {
 		//sql 실행 및 결과 저장
 		//결과 리턴
 		
-//		int result = ss.insert("", vo);
+//		int result = ss.insert("sql 위치", vo);
 //		return result;
 		
 		return ss.insert("memberMapper.join", vo);
 		
 	}
 
+	/**
+	 * 로그인
+	 */
 	public MemberVo login(SqlSession ss, MemberVo vo) {
 		return ss.selectOne("memberMapper.login", vo);
 	}

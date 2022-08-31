@@ -2,37 +2,41 @@ package com.kh.member.vo;
 
 public class MemberVo {
 	
-	private String userId;
-	private String userPwd;
+	private String id;
+	private String pwd;
 	
 	public MemberVo() {}
 
-	public MemberVo(String userId, String userPwd) {
+	public MemberVo(String id, String pwd) {
 		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
+		this.id = id;
+		this.pwd = pwd;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getId() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getUserPwd() {
-		return userPwd;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberVo [userId=" + userId + ", userPwd=" + userPwd + "]";
+		return "MemberVo [id=" + id + ", pwd=" + pwd + "]";
 	}
+	
+	
+
+	
 
 	
 	

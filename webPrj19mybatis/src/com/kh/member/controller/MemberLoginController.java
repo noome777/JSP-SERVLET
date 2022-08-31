@@ -23,8 +23,8 @@ public class MemberLoginController extends HttpServlet {
 		
 		//vo
 		MemberVo vo = new MemberVo();
-		vo.setUserId(userId);
-		vo.setUserPwd(userPwd);
+		vo.setId(userId);
+		vo.setPwd(userPwd);
 		
 		//service 호출
 		MemberVo loginMember = new MemberService().login(vo);

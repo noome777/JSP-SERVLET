@@ -19,10 +19,11 @@ public class SqlTemplate {
 	//close
 
 	public static SqlSession getSqlSession() {
-		
+	
 		SqlSession ss = null;
 		
 		try {
+			//resources는 src처럼 최상단 경로이므로 생략
 			String resource = "/mybatis-config.xml";
 			InputStream inputStream = Resources.getResourceAsStream(resource);
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);

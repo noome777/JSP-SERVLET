@@ -30,6 +30,10 @@ public class MemberService {
 		//결과 리턴
 		return result;
 	}
+	
+	/**
+	 * 로그인
+	 */
 
 	public MemberVo login(MemberVo vo) {
 		
