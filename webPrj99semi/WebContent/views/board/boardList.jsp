@@ -3,15 +3,16 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%
- 	List<BoardVo> voList = (List) request.getAttribute("list");
+
+<%
+ 	List<BoardVo> voList = (List<BoardVo>) request.getAttribute("list");
  	PageVo pv = (PageVo) request.getAttribute("pv");
  	
  	int currentPage = pv.getCurrentPage();
  	int startPage = pv.getStartPage();
  	int endPage = pv.getEndPage();
  	int maxPage = pv.getMaxPage();
- %>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,9 +55,17 @@
         
         <!-- 로그인 한 사람만 글쓰기 버튼이 보이게 해주기 -->
         <div style="text-align: right; width: 95%">
-        <%if(loginMember != null){%>
-	        <a class="btn btn-primary" href="<%=contextPath%>/board/insert">글쓰기</a>
-	        <%} %>
+       <%-- 
+       <%if(loginMember != null){%>
+	   <a class="btn btn-primary" href="<%=contextPath%>/board/insert">글쓰기</a>
+	   <%} %>  
+	   --%>
+	    
+	    
+	    <!-- jstl 사용 -->
+		    <c:if test="${not empty loginMember}">
+		        <a class="btn btn-primary" href="${cp}/board/insert">글쓰기</a>
+		    </c:if>
         </div>
 
         <table border="1">
@@ -69,6 +78,7 @@
                 <th>조회수</th>
                 <th>작성일시</th>
             </tr>
+            <%-- 
             <%for(BoardVo b : voList){ %>
 	            <tr>
 	                <td><%=b.getNo() %></td>
@@ -78,7 +88,33 @@
 	                <td><%=b.getCnt() %></td>
 	                <td><%=b.getEnrollDate() %></td>
 	            </tr>
-            <%} %>
+            <%} %> 
+            --%>
+            
+            
+           <%--
+            	<c:forEach items="<%=voList%>" var="b">
+	            <tr>
+	                <td>${b.no}</td>
+	                <td>${b.category}</td>
+	                <td>${b.title}</td>
+	                <td>${b.writer}</td>
+	                <td>${b.cnt}</td>
+	                <td>${b.enrollDate}</td>
+	            </tr>
+           	</c:forEach> 
+           	--%>
+           	
+           	<c:forEach items="${list}" var="b">
+	            <tr>
+	                <td>${b.no}</td>
+	                <td>${b.category}</td>
+	                <td>${b.title}</td>
+	                <td>${b.writer}</td>
+	                <td>${b.cnt}</td>
+	                <td>${b.enrollDate}</td>
+	            </tr>
+           	</c:forEach>
         </table>
 
         <div id="page-area">
