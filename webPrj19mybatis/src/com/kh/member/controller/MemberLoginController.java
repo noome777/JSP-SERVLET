@@ -32,7 +32,6 @@ public class MemberLoginController extends HttpServlet {
 		//화면선택
 		if(loginMember != null) {
 			System.out.println("로그인 성공");
-			
 			System.out.println(loginMember);
 		} else {
 			System.out.println("로그인 실패");
