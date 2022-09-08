@@ -36,6 +36,7 @@ public class MemberLoginController extends HttpServlet {
 		} else {
 			System.out.println("로그인 실패");
 		}
+
 		
 	}
 }
